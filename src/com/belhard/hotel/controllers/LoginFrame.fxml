@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" maxHeight="300.0" maxWidth="400.0" minHeight="300.0" minWidth="400.0" prefHeight="300.0" prefWidth="400.0" styleClass="table-view" stylesheets="@../resources/style/DarkTheme.css" xmlns="http://javafx.com/javafx/8.0.111" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.belhard.hotel.frame.LoginFrame">
+   <children>
+      <VBox alignment="TOP_CENTER" layoutX="11.0" layoutY="14.0" prefHeight="255.0" prefWidth="360.0" AnchorPane.bottomAnchor="25.0" AnchorPane.leftAnchor="20.0" AnchorPane.rightAnchor="20.0" AnchorPane.topAnchor="20.0">
+         <children>
+            <Label alignment="TOP_CENTER" contentDisplay="TOP" layoutX="166.0" layoutY="15.0" text="Hello! Enter your Login or Register" textAlignment="CENTER">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <VBox.margin>
+                  <Insets bottom="5.0" />
+               </VBox.margin>
+            </Label>
+            <Label text="Login" textAlignment="CENTER">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <VBox.margin>
+                  <Insets bottom="5.0" top="5.0" />
+               </VBox.margin>
+            </Label>
+            <TextField fx:id="enterLogin" alignment="TOP_CENTER" promptText="Enter Login here" styleClass="context-menu" stylesheets="@../resources/style/DarkTheme.css" text="user">
+               <VBox.margin>
+                  <Insets bottom="5.0" top="5.0" />
+               </VBox.margin>
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </TextField>
+            <Label layoutX="168.0" layoutY="20.0" text="Password" textAlignment="CENTER">
+               <font>
+                  <Font size="18.0" />
+               </font>
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <VBox.margin>
+                  <Insets bottom="5.0" top="5.0" />
+               </VBox.margin>
+            </Label>
+            <PasswordField fx:id="enterPassword" alignment="TOP_CENTER" promptText="Enter Password here" styleClass="context-menu" stylesheets="@../resources/style/DarkTheme.css" text="123456">
+               <VBox.margin>
+                  <Insets bottom="5.0" top="5.0" />
+               </VBox.margin>
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </PasswordField>
+            <ButtonBar prefHeight="40.0" prefWidth="200.0">
+              <buttons>
+                  <Button fx:id="buttonEnter" alignment="TOP_CENTER" contentDisplay="TOP" mnemonicParsing="false" prefHeight="25.0" prefWidth="212.0" text="Enter">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <font>
+                        <Font size="14.0" />
+                     </font>
+                  </Button>
+                <Button fx:id="buttonRegistration" mnemonicParsing="false" prefHeight="25.0" text="Registration">
+                     <font>
+                        <Font size="14.0" />
+                     </font></Button>
+              </buttons>
+               <VBox.margin>
+                  <Insets left="-20.0" top="10.0" />
+               </VBox.margin>
+            </ButtonBar>
+         </children>
+      </VBox>
+   </children>
+</AnchorPane>
