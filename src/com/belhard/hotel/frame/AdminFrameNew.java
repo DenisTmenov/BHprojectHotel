@@ -219,7 +219,7 @@ public class AdminFrameNew implements Initializable {
             } catch (SQLException e) {
                 System.out.println("Неправильно введены данные");
                 System.out.println(
-                                roomsTable.getSelectionModel().getSelectedItem().getId_room() + " " +
+                        roomsTable.getSelectionModel().getSelectedItem().getId_room() + " " +
                                 roomsTable.getSelectionModel().getSelectedItem().getNumber() + " " +
                                 roomsTable.getSelectionModel().getSelectedItem().getType() + " " +
                                 roomsTable.getSelectionModel().getSelectedItem().getCount_beds() + " " +
@@ -246,13 +246,19 @@ public class AdminFrameNew implements Initializable {
         });
         usersDELETEbutton.setOnAction(event -> {
             try {
-                DaoUsers dao = new DaoUsers(Main.getDb());
-                dao.delete(new Users(usersTable.getSelectionModel().getSelectedItem().getId_user()));
-                showDataBase();
-            } catch (ClassNotFoundException e) {
-                System.out.println("Нет связи с сервером");
-            } catch (SQLException e) {
-                System.out.println("Неправильно введены данные");
+                if (usersTable.getSelectionModel().getSelectedItem().getLogin().equals("admin")) {
+                    Message.msInfo("But not the administrator.", "It's the administrator. ", "You can not delete it.", 1500);
+                } else {
+                    try {
+                        DaoUsers dao = new DaoUsers(Main.getDb());
+                        dao.delete(new Users(usersTable.getSelectionModel().getSelectedItem().getId_user()));
+                        showDataBase();
+                    } catch (ClassNotFoundException e) {
+                        System.out.println("Нет связи с сервером");
+                    } catch (SQLException e) {
+                        System.out.println("Неправильно введены данные");
+                    }
+                }
             } catch (NullPointerException e) {
                 Message.msInfo("No select", "No select row.", "Please select a row.", 1500);
             }
@@ -322,7 +328,6 @@ public class AdminFrameNew implements Initializable {
         });
 // !!!! button NEW !!!! finish
 
-// TAB Users Information
         usInfoTable.getSelectionModel().selectedItemProperty().addListener(
                 (observable, oldValue, newValue) -> showUserInfo(newValue));
     }
@@ -336,9 +341,7 @@ public class AdminFrameNew implements Initializable {
         ObservableList<String> ordersTypeCOMBO = FXCollections.observableArrayList();
         ObservableList<String> ordersStatusCOMBO = FXCollections.observableArrayList();
         ordersStatusCOMBO.addAll("paid", "busy", "new");
-        for (Orders anOrdersRow : ordersRow) {
-            ordersOblist.add(anOrdersRow);
-        }
+        ordersOblist.addAll(ordersRow);
         //!!!! USERS !!!!
         LinkedList<Users> usersRow = Users.getList(Main.getDb().query("SELECT * FROM users"));
         ObservableList<Users> usersOblist = FXCollections.observableArrayList();
@@ -353,9 +356,7 @@ public class AdminFrameNew implements Initializable {
         //!!!! USERS INFO !!!!
         LinkedList<Users_info> usersInfoRow = Users_info.getList(Main.getDb().query("SELECT * FROM users_info"));
         ObservableList<Users_info> usersInfoOblist = FXCollections.observableArrayList();
-        for (Users_info anUsersInfoRow : usersInfoRow) {
-            usersInfoOblist.add(anUsersInfoRow);
-        }
+        usersInfoOblist.addAll(usersInfoRow);
         //!!!! ROOMS !!!!
         LinkedList<Rooms> roomsRow = Rooms.getList(Main.getDb().query("SELECT * FROM rooms"));
         ObservableList<Rooms> roomsOblist = FXCollections.observableArrayList();
@@ -434,25 +435,17 @@ public class AdminFrameNew implements Initializable {
         usersDelStatusColumn.setCellValueFactory(cellData -> cellData.getValue().del_statusProperty());
         //!!!!!!!!!!!!!!!!!
 
-        /*usInfoIDUSERcolumn.setCellFactory(TextFieldTableCell.forTableColumn());
-        usInfoLogincolumn.setCellFactory(TextFieldTableCell.forTableColumn());
-        usInfoPASScolumn.setCellFactory(TextFieldTableCell.forTableColumn());
-        usInfoROLEcolumn.setCellFactory(TextFieldTableCell.forTableColumn());
-        usInfoDELSTATUScolumn.setCellFactory(TextFieldTableCell.forTableColumn());*/
-
         usInfoIDUSERcolumn.setCellValueFactory(cellData -> cellData.getValue().id_userProperty());
         usInfoLogincolumn.setCellValueFactory(cellData -> cellData.getValue().loginProperty());
         usInfoPASScolumn.setCellValueFactory(cellData -> cellData.getValue().passwordProperty());
         usInfoROLEcolumn.setCellValueFactory(cellData -> cellData.getValue().roleProperty());
         usInfoDELSTATUScolumn.setCellValueFactory(cellData -> cellData.getValue().del_statusProperty());
 
-
         ordersTable.setItems(ordersOblist);
         usersTable.setItems(usersOblist);
         usersInfoTable.setItems(usersInfoOblist);
         roomsTable.setItems(roomsOblist);
         usInfoTable.setItems(usersOblist);
-
 
     }
 
@@ -480,13 +473,6 @@ public class AdminFrameNew implements Initializable {
             usInfoEMAILlable.setText("");
             usInfoNUMPASSPORTlable.setText("");
         }
-    }
-
-
-    /**
-     * Created by Darth Vader on 01.04.2017.
-     */
-    public static class RegFrameNew {
     }
 }
 

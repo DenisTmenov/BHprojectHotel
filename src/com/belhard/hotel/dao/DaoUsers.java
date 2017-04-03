@@ -8,9 +8,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-/**
- * Created by Darth Vader on 18.03.2017.
- */
 public class DaoUsers  implements DaoInterface<Users>  {
     private DB db;
 
@@ -22,7 +19,7 @@ public class DaoUsers  implements DaoInterface<Users>  {
     public void insert(Users ob)   {
         try {
             PreparedStatement ps = db.getCn().prepareStatement("INSERT INTO " + ob.getClass().getSimpleName()
-                    + " VALUES (id_user=?, login=?, password=?, role=?, del_status=?)");
+                    + " VALUES (?, ?, ?, ?, ?)");
             ps.setString(1, ob.getId_user());
             ps.setString(2, ob.getLogin());
             ps.setString(3, ob.getPassword());

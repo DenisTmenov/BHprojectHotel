@@ -8,9 +8,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-/**
- * Created by Darth Vader on 18.03.2017.
- */
 public class DaoRooms implements DaoInterface<Rooms> {
     private DB db;
 
@@ -60,7 +57,6 @@ public class DaoRooms implements DaoInterface<Rooms> {
         PreparedStatement ps = db.getCn().prepareStatement("DELETE FROM " + ob.getClass().getSimpleName()
                 + " WHERE id_room = " + ob.getId_room());
         ps.execute();
-        System.out.println("удалили комнату из базы данных.");
     }
 
     public ResultSet getAll() {

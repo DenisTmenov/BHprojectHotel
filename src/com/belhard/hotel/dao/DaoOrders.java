@@ -9,9 +9,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-/**
- * Created by Darth Vader on 18.03.2017.
- */
 public class DaoOrders implements DaoInterface<Orders> {
     private DB db;
 
@@ -70,7 +67,6 @@ public class DaoOrders implements DaoInterface<Orders> {
         try {
             Statement st = db.getCn().createStatement();
             rs = st.executeQuery("SELECT * FROM orders WHERE id_user = " + LoginFrame.getRsInfo().getString(1));
-            System.out.println("id_user = " + LoginFrame.getRsInfo().getString(1));
         } catch (SQLException e) {
             System.out.println("Error in getALL ORDERS.");
             e.printStackTrace();

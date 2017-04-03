@@ -14,20 +14,15 @@ import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 public class LoginFrame implements Initializable {
-    private static String nameLogin;
     private static ResultSet rsInfo;
-    @FXML // fx:id="enterLogin"
-    private TextField enterLogin; // Value injected by FXMLLoader
-    @FXML // fx:id="enterPassword"
-    private PasswordField enterPassword; // Value injected by FXMLLoader
-    @FXML // fx:id="buttonEnter"
-    private Button buttonEnter; // Value injected by FXMLLoader
-    @FXML // fx:id="buttonRegistration"
-    private Button buttonRegistration; // Value injected by FXMLLoader
-
-    static String getNameLogin() {
-        return nameLogin;
-    }
+    @FXML
+    private TextField enterLogin;
+    @FXML
+    private PasswordField enterPassword;
+    @FXML
+    private Button buttonEnter;
+    @FXML
+    private Button buttonRegistration;
 
     public static ResultSet getRsInfo() {
         return rsInfo;
@@ -41,20 +36,13 @@ public class LoginFrame implements Initializable {
         setRsInfo(Main.getDb().query("SELECT * FROM users WHERE login = '" + Login.getText() + "'"));
         try {
             if (rsInfo.next()) {
-                System.out.println(rsInfo.getString(2));
                 if (Login.getText().equals(rsInfo.getString(2))) {
                     if (Password.getText().equals(rsInfo.getString(3))) {
                         if (rsInfo.getString(5).equals("OK")) {
                             if (rsInfo.getString(4).equals("admin")) {
-                                System.out.println("запустить AdminFrame.");
-                                nameLogin = Login.getText();
-                                //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                                 new NewScene(button, "AdminFrameNew", true);
-                                //!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
                             } else if (rsInfo.getString(4).equals("user")) {
-                                System.out.println("запустить UserFrame.");
-                                nameLogin = Login.getText();
-                                new NewScene(button, "UserFrame", false);
+                                new NewScene(button, "UserFrameNew", false);
                             } else {
                                 System.out.println("ошибка в роли");
                                 Message.msError("Error.","Mistake.", "Mistake in ROLE.");
@@ -84,10 +72,7 @@ public class LoginFrame implements Initializable {
     @FXML
     // This method is called by the FXMLLoader when initialization is complete
     @Override public void initialize(URL location, ResourceBundle resources) {
-        buttonEnter.setOnAction((event -> {
-            System.out.println("Enter button Enter \n");
-            actionButtonEnter(enterLogin, enterPassword, buttonEnter);
-        }));
+        buttonEnter.setOnAction((event -> actionButtonEnter(enterLogin, enterPassword, buttonEnter)));
         buttonRegistration.setOnAction((event -> new NewScene(buttonRegistration, "RegFrame", false)));
         enterLogin.setOnAction(event -> actionButtonEnter(enterLogin, enterPassword, buttonEnter));
         enterPassword.setOnAction(event -> actionButtonEnter(enterLogin, enterPassword, buttonEnter));

@@ -1,9 +1,7 @@
 package com.belhard.hotel.frame;
 
-import com.belhard.hotel.dao.DaoOrders;
 import com.belhard.hotel.dao.DaoUsers;
 import com.belhard.hotel.dao.DaoUsers_info;
-import com.belhard.hotel.entity.Orders;
 import com.belhard.hotel.entity.Users;
 import com.belhard.hotel.entity.Users_info;
 import com.belhard.hotel.util.Message;
@@ -20,17 +18,10 @@ import javafx.stage.Stage;
 import java.net.URL;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.ResourceBundle;
 
-/**
- * Created by Darth Vader on 30.03.2017.
- */
 public class NewUserAdminFrame implements Initializable {
     private Stage dialogStage;
-    private boolean okClicked = false;
     @FXML
     private TextField NUAFidUserTextField, NUAFloginTextField,
             NUAFpasswordTextField,NUAFstatusTextField;
@@ -81,7 +72,6 @@ public class NewUserAdminFrame implements Initializable {
                     String.valueOf(Integer.parseInt(NUAFidUserTextField.getText()) + 1)
             );
             daoUsers_info.insert(info);
-            okClicked = true;
             dialogStage.close();
         }
     }

@@ -1,7 +1,3 @@
-/**
- * Sample Skeleton for 'UserFrame.fxml' Controller Class
- */
-
 package com.belhard.hotel.frame;
 
 import com.belhard.hotel.util.Message;
@@ -107,29 +103,19 @@ public class UserFrame {
                         //Integer.parseInt(rsOrders.getString(8)),
                         rsOrders.getString(9)
                 ));
-                //System.out.println(Integer.parseInt(rsOrders.getString(1)));
             }
         } catch (SQLException e) {
             e.printStackTrace();
-        }
-
-        for (Orders aListOrder : listOrder) {
-            System.out.println(aListOrder);
         }
     }
 
     @FXML // This method is called by the FXMLLoader when initialization is complete
     public void initialize() {
         // Handle Button event.
-        NObuttonLog_out.setOnAction(event -> {
-            System.out.println("Вернулись в LoginFrame");
-            new NewScene(NObuttonLog_out, "LoginFrame", false);
-        });
+        NObuttonLog_out.setOnAction(( event) ->
+            new NewScene(NObuttonLog_out, "LoginFrame", false));
         // Handle Button event.
-        CObuttonLog_out.setOnAction(event -> {
-            System.out.println("Вернулись в LoginFrame");
-            new NewScene(CObuttonLog_out, "LoginFrame", false);
-        });
+        CObuttonLog_out.setOnAction(event -> new NewScene(CObuttonLog_out, "LoginFrame", false));
         // Handle TextField event.
         NOcontBeds.textProperty().addListener((observable, oldValue, newValue) -> {
             // Observer (Наблюдатель) Реализация данного паттерна используется для наблюдения за состоянием объектов в системе.
@@ -171,17 +157,12 @@ public class UserFrame {
                 Message.msInfo("Message", "Mistake in check out.","Enter date of check out.", 1500);
             }
             if (NOcheck_in.getEditor().getLength() > 0 && NOcheck_out.getEditor().getLength() > 0) {
-                System.out.println(NOcheck_in.getEditor().getText());
-                System.out.println(NOcheck_out.getEditor().getText());
                 DateFormat df = new SimpleDateFormat("dd.MM.yyyy");
                 try {
                     Date check_in_date = df.parse(NOcheck_in.getEditor().getText());
                     Date check_out_date = df.parse(NOcheck_out.getEditor().getText());
-                    System.out.println(check_in_date);
-                    System.out.println(check_in_date.getTime());
                     if (check_out_date.getTime() - check_in_date.getTime() < 0) {
                         en = false;
-                        System.out.println(check_out_date.getTime() - check_in_date.getTime());
                         Message.msInfo("Message","Mistake in date.", "You are make mistake in date of check in and check out.", 1500);
                     }
                 } catch (ParseException e) {
@@ -209,8 +190,6 @@ public class UserFrame {
             }
         });
 
-        NOtype.setItems(listRooms);
-
         idColumn.setCellValueFactory(new PropertyValueFactory<>("idColumn"));
         idUserColumn.setCellValueFactory(new PropertyValueFactory<>("idUserColumn"));
         numberColumn.setCellValueFactory(new PropertyValueFactory<>("numberColumn"));
@@ -221,9 +200,7 @@ public class UserFrame {
         priceColumn.setCellValueFactory(new PropertyValueFactory<>("priceColumn"));
         statusColumn.setCellValueFactory(new PropertyValueFactory<>("statusColumn"));
 
+        NOtype.setItems(listRooms);
         tableOrderUser.setItems(listOrder);
-        //tableOrderUser.getColumns().addAll();
-
-        System.out.println(LoginFrame.getNameLogin()); // имя (login) пользователя запустившего фрэйм
     }
 }

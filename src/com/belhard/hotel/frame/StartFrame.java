@@ -30,14 +30,14 @@ public class StartFrame {
             DB db = new DB(URL.getText(), NameDB.getText(), Login.getText(), Password.getText());
             db.update("USE "+ NameDB.getText());
             Main.setDb(db);
-            DB.showTable(db.query("SELECT * FROM users"));
+            /*DB.showTable(db.query("SELECT * FROM users"));
             System.out.println();
             DB.showTable(db.query("SELECT * FROM users_info"));
             System.out.println();
             DB.showTable(db.query("SELECT * FROM rooms"));
             System.out.println();
             DB.showTable(db.query("SELECT * FROM orders"));
-            System.out.println("\nПодключение к базе данных прошло успешно.");
+            System.out.println("\nПодключение к базе данных прошло успешно.");*/
             new NewScene(button, "LoginFrame", false);
         } catch (ClassNotFoundException e) {
             System.out.println("Error in Connect");
@@ -55,7 +55,6 @@ public class StartFrame {
         // Handle Button event.
 
         buttonCreate.setOnAction((event) -> {
-            System.out.println("Enter button Create \n");
             try {
                 WorkDB.createDB(enterURL.getText(), enterNameDB.getText(), enterLogin.getText(), enterPassword.getText());
                 Message.msInfo("Information.","Success!", "Database was created successful!", 1500);
@@ -82,22 +81,10 @@ public class StartFrame {
         buttonConnect.setOnAction((event) ->
                 actionButtonConnect(enterURL, enterNameDB, enterLogin, enterPassword, buttonConnect));
 
-        enterURL.setOnAction((event -> {
-            System.out.println("Action URL");
-            actionButtonConnect(enterURL, enterNameDB, enterLogin, enterPassword, buttonConnect);
-        }));
-        enterLogin.setOnAction(event -> {
-            System.out.println("Action Login");
-            actionButtonConnect(enterURL, enterNameDB, enterLogin, enterPassword, buttonConnect);
-        });
-        enterNameDB.setOnAction(event -> {
-            System.out.println("Enter NameDB");
-            actionButtonConnect(enterURL, enterNameDB, enterLogin, enterPassword, buttonConnect);
-        });
-        enterPassword.setOnAction(event -> {
-            System.out.println("Enter Password");
-            actionButtonConnect(enterURL, enterNameDB, enterLogin, enterPassword, buttonConnect);
-        });
+        enterURL.setOnAction((event -> actionButtonConnect(enterURL, enterNameDB, enterLogin, enterPassword, buttonConnect)));
+        enterLogin.setOnAction(event -> actionButtonConnect(enterURL, enterNameDB, enterLogin, enterPassword, buttonConnect));
+        enterNameDB.setOnAction(event -> actionButtonConnect(enterURL, enterNameDB, enterLogin, enterPassword, buttonConnect));
+        enterPassword.setOnAction(event -> actionButtonConnect(enterURL, enterNameDB, enterLogin, enterPassword, buttonConnect));
     }
 
 }

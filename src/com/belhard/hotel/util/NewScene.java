@@ -12,22 +12,20 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-/**
- * Created by Darth Vader on 17.03.2017.
- */
 public class NewScene {
     public NewScene(Button button, String sceneName, boolean Resizable) {
         Stage stage = (Stage) button.getScene().getWindow();
-        // do what you have to do
         stage.close();
         String sceneLoader = "/com/belhard/hotel/controllers/" + sceneName + ".fxml";
         try {
+            FXMLLoader loader = new FXMLLoader();
+            loader.setLocation(getClass().getResource(sceneLoader));
+            Parent page = loader.load();
             Stage mainStage = new Stage();
-            Parent page = FXMLLoader.load(getClass().getResource(sceneLoader));
-            Scene scene = new Scene(page);
             mainStage.setTitle("Project HOTEL. " + sceneName + ".");
             mainStage.getIcons().add(new Image("com/belhard/hotel/resources/images/1489711413_City.png"));
             mainStage.setResizable(Resizable);
+            Scene scene = new Scene(page);
             mainStage.setScene(scene);
             mainStage.show();
         } catch (IOException e) {
@@ -38,13 +36,11 @@ public class NewScene {
 
     public NewScene(Button button, String sceneName, boolean Resizable, boolean close) {
         Stage stage = (Stage) button.getScene().getWindow();
-        // do what you have to do
         if (close) {
             stage.close();
         }
         String sceneLoader = "/com/belhard/hotel/controllers/" + sceneName + ".fxml";
         try {
-
             // Загружаем fxml-файл и создаём новую сцену
             // для всплывающего диалогового окна.
             FXMLLoader loader = new FXMLLoader();

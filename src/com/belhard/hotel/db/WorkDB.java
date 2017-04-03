@@ -11,9 +11,6 @@ import com.belhard.hotel.entity.Users_info;
 
 import java.sql.SQLException;
 
-/**
- * Created by Darth Vader on 12.03.2017.
- */
 public class WorkDB {
     public static void createDB(String url, String nameDB, String login, String password) throws SQLException, ClassNotFoundException {
         DB db = new DB(url, "", login, password);
@@ -30,12 +27,12 @@ public class WorkDB {
         db.update("CREATE TABLE users_info ("
                 + "id_user_info INT AUTO_INCREMENT,"
                 + "id_user INT NOT NULL UNIQUE,"
-                + "name VARCHAR(50) NOT NULL,"
-                + "sure_name VARCHAR(50) NOT NULL,"
-                + "nationality VARCHAR(50) NOT NULL,"
-                + "phone VARCHAR(50) NOT NULL UNIQUE,"
-                + "e_mail VARCHAR(50) NOT NULL UNIQUE,"
-                + "num_passport VARCHAR(50) NOT NULL UNIQUE,"
+                + "name VARCHAR(50) ,"
+                + "sure_name VARCHAR(50) ,"
+                + "nationality VARCHAR(50) ,"
+                + "phone VARCHAR(50) UNIQUE,"
+                + "e_mail VARCHAR(50) UNIQUE,"
+                + "num_passport VARCHAR(50) UNIQUE,"
                 + "FOREIGN KEY(id_user) REFERENCES users (id_user),"
                 + "PRIMARY KEY(id_user_info))");
 
@@ -59,9 +56,7 @@ public class WorkDB {
                 + "price INT ,"
                 + "status ENUM('paid', 'busy', 'new', 'del') DEFAULT 'new' ,"
                 + "FOREIGN KEY(id_user) REFERENCES users (id_user),"
-               // + "FOREIGN KEY(number) REFERENCES rooms (number),"
                 + "PRIMARY KEY(id_order))");
-
 
         DaoUsers du = new DaoUsers(db);
         DaoUsers_info dui = new DaoUsers_info(db);
@@ -69,14 +64,12 @@ public class WorkDB {
         DaoRooms dr = new DaoRooms(db);
         //!!!!!!!!!!!!!!!!!!!!!!!!!!!
         du.insert(new Users("1", "admin", "123456","admin", "OK"));
-        du.insert(new Users("2", "manager", "manager", "admin", "OK"));
+        du.insert(new Users("2", "manager", "123456", "admin", "OK"));
         du.insert(new Users("3","user", "123456", "user", "OK"));
-        du.update(new Users("2", "manager", "123456", "admin", "del"));
         //!!!!!!!!!!!!!!!!!!!!!!!!!!!
         dui.insert(new Users_info("1", "1","Shelden", "Kupper", "USA", "80294478896", "sheldon.k@gmail.com", "MM32569812"));
         dui.insert(new Users_info("2", "2", "Rajesh", "Kutrapaly", "IND","80339958745", "rajesh.k@gmail.com", "MM12453641"));
         dui.insert(new Users_info("3", "3", "Ivan", "Ivanov", "RUS", "80448865412", "ivan.i@gmail.com", "RS14525786"));
-        dui.update(new Users_info("2","2", "qwe", "qwe","qwe","qwe","qwe","qwe"));
         //!!!!!!!!!!!!!!!!!!!!!!!!!!!
         dr.insert(new Rooms("1", "101", "Economy", "1", "50", "free"));
         dr.insert(new Rooms("2","102", "Economy", "1","50", "free"));
@@ -102,19 +95,19 @@ public class WorkDB {
         dor.insert_user(new Orders("3", "2", "Standart", "01.02.2017", "10.02.2017"));
         dor.insert_user(new Orders("3", "2", "Standart", "01.03.2017", "10.03.2017"));
         //!!!!!!!!!!!!!!!!!!!!!!!!!!!
-        DB.showTable(db.query("SELECT * FROM users"));
+        /*DB.showTable(db.query("SELECT * FROM users"));
         System.out.println();
         DB.showTable(db.query("SELECT * FROM users_info"));
         System.out.println();
         DB.showTable(db.query("SELECT * FROM rooms"));
         System.out.println();
-        DB.showTable(db.query("SELECT * FROM orders"));
-        System.out.println("\nБаза данных создана.");
+        DB.showTable(db.query("SELECT * FROM orders"));*/
+        //System.out.println("\nБаза данных создана.");
     }
 
     public static void deleteDB(String url, String nameDB, String login, String password) throws SQLException, ClassNotFoundException {
         DB db = new DB(url, nameDB, login, password);
         db.update("DROP DATABASE " + nameDB);
-        System.out.println("База данных удалена.");
+        //System.out.println("База данных удалена.");
     }
 }

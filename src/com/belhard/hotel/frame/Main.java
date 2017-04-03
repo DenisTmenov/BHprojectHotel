@@ -17,9 +17,10 @@ public class Main extends Application {
         return db;
     }
 
-    public static void setDb(DB aa) {
-        db = aa;
+    static void setDb(DB db) {
+        Main.db = db;
     }
+
     @Override
     public void start(Stage mainStage) {
         try {

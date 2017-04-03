@@ -2,9 +2,6 @@ package com.belhard.hotel.db;
 
 import java.sql.*;
 
-/**
- * Created by Darth Vader on 12.03.2017.
- */
 public class DB {
     private Connection cn;
     private Statement st;
@@ -17,15 +14,7 @@ public class DB {
         cn = DriverManager.getConnection(url + nameDB + "?useSSL=false", login, password);
         st = cn.createStatement();
         update("SET NAMES 'utf8'");
-        System.out.println("Подключение к серверу установлено.");
-    }
-
-    public DB() throws SQLException, ClassNotFoundException {
-        Class.forName("com.mysql.jdbc.Driver");
-        cn = DriverManager.getConnection("jdbc:mysql://127.0.0.1/" + "carRent?useSSL=false", "root", "root");
-        st = cn.createStatement();
-        update("SET NAMES 'utf8'");
-        System.out.println("Подключение к серверу установлено.");
+        //System.out.println("Подключение к серверу установлено.");
     }
 
     public void update(String sql) throws SQLException {
@@ -43,7 +32,7 @@ public class DB {
     }
 
 
-    public static void showTable(ResultSet rs) {
+    /*public static void showTable(ResultSet rs) {
         try {
             ResultSetMetaData rsmd = rs.getMetaData();
             for (int i = 1; i <= rsmd.getColumnCount(); i++) {
@@ -58,7 +47,7 @@ public class DB {
         } catch (SQLException e) {
             System.out.println("Oшибка в выводе данных.");
         }
-    }
+    }*/
 
     public void close() {
         try {
